@@ -23,20 +23,14 @@ func main() {
 		groups = append(groups, sack)
 
 		if len(groups) != 3 {
-			fmt.Printf("Next row %d \n", len(groups))
 			continue
 		}
 
-		fmt.Printf("Calc for row %d \n", len(groups))
-
 		// Transfer into uint8 arrays
 		g1, g2, g3 := strings.Split(groups[0], ""), strings.Split(groups[1], ""), strings.Split(groups[2], "")
-		inTwo := intersects(g1, g2)
-
-		inThree := intersects(inTwo, g3)[0]
+		inThree := intersects(intersects(g1, g2), g3)[0]
 
 		res += uint16(GetValB(inThree[0]))
-
 		groups = nil
 	}
 
