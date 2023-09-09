@@ -16,5 +16,5 @@ func ReadRows(useTest bool) []string {
 		panic(err)
 	}
 
-	return strings.Split(string(dat), "\n")
+	return strings.Split(string(dat), "\r\n")
 }

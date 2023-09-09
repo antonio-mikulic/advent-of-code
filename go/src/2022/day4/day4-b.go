@@ -1,25 +1,17 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
+	"github.com/antonio-mikulic/advent-of-code/pkg/reader"
 	"github.com/antonio-mikulic/advent-of-code/pkg/utils"
-	"os"
 	"strings"
 )
 
 func main() {
-	dat, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-
 	var res uint16 = 0
 
-	scanner := bufio.NewScanner(dat)
-
-	for scanner.Scan() {
-		group := strings.Split(scanner.Text(), ",")
+	for _, text := range reader.ReadRows(false) {
+		group := strings.Split(text, ",")
 		firstElf := strings.Split(group[0], "-")
 		secondElf := strings.Split(group[1], "-")
 
