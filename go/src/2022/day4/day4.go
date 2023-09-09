@@ -3,8 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/antonio-mikulic/advent-of-code/pkg/utils"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -24,29 +24,16 @@ func main() {
 		secondElf := strings.Split(group[1], "-")
 
 		first := []int{
-			getInt(firstElf[0]), getInt(firstElf[1]),
+			utils.GetInt(firstElf[0]), utils.GetInt(firstElf[1]),
 		}
 		second := []int{
-			getInt(secondElf[0]), getInt(secondElf[1]),
+			utils.GetInt(secondElf[0]), utils.GetInt(secondElf[1]),
 		}
 
-		if isFirstPartOfSecond(first, second) || isFirstPartOfSecond(second, first) {
+		if utils.IsFirstPartOfSecond(first, second) || utils.IsFirstPartOfSecond(second, first) {
 			res += 1
 		}
 	}
 
 	fmt.Println(res)
-}
-
-func isFirstPartOfSecond(first []int, second []int) bool {
-	return first[0] >= second[0] && first[1] <= second[1]
-}
-
-func getInt(str string) int {
-	val, err := strconv.Atoi(str)
-	if err != nil {
-		panic(err)
-	}
-
-	return val
 }

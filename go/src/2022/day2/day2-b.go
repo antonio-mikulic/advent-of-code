@@ -1,23 +1,14 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"github.com/antonio-mikulic/advent-of-code/pkg/reader"
 )
 
 func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	fileScanner := bufio.NewScanner(file)
-
 	score := 0
 
-	for fileScanner.Scan() {
-		game := fileScanner.Text()
+	for _, game := range reader.ReadRows(false) {
 		me := game[2]
 
 		switch me {

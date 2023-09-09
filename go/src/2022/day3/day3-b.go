@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	utils2 "github.com/antonio-mikulic/advent-of-code/pkg/utils"
 	"os"
 	"strings"
 )
@@ -28,36 +29,11 @@ func main() {
 
 		// Transfer into uint8 arrays
 		g1, g2, g3 := strings.Split(groups[0], ""), strings.Split(groups[1], ""), strings.Split(groups[2], "")
-		inThree := intersects(intersects(g1, g2), g3)[0]
+		inThree := utils2.Intersects(utils2.Intersects(g1, g2), g3)[0]
 
-		res += uint16(GetValB(inThree[0]))
+		res += uint16(utils2.GetCharFromShortInt(inThree[0]))
 		groups = nil
 	}
 
 	fmt.Println(res)
-}
-
-func intersects[T comparable](a []T, b []T) []T {
-	set := make([]T, 0)
-	hash := make(map[T]struct{})
-
-	for _, v := range a {
-		hash[v] = struct{}{}
-	}
-
-	for _, v := range b {
-		if _, ok := hash[v]; ok {
-			set = append(set, v)
-		}
-	}
-
-	return set
-}
-
-func GetValB(item uint8) uint8 {
-	if item > 96 {
-		return item - 96
-	}
-
-	return item - 64 + 26
 }

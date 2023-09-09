@@ -1,18 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"github.com/antonio-mikulic/advent-of-code/pkg/reader"
 )
 
 func main() {
-	file, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	fileScanner := bufio.NewScanner(file)
 
 	// Rock = A && X
 	// Paper = B && Y
@@ -34,8 +27,7 @@ func main() {
 	paperScore := 2
 	scissorsScore := 3
 
-	for fileScanner.Scan() {
-		word := fileScanner.Text()
+	for _, word := range reader.ReadRows(false) {
 		they := word[0]
 		me := word[2]
 		fmt.Printf("%c - %c, starting at %d. ", they, me, score)

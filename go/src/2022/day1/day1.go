@@ -1,29 +1,22 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"github.com/antonio-mikulic/advent-of-code/pkg/reader"
 	"slices"
 	"strconv"
+	"time"
 )
 
 func main() {
-	dat, err := os.Open("./input.txt")
-	if err != nil {
-		panic(err)
-	}
-
-	fileScanner := bufio.NewScanner(dat)
-	fileScanner.Split(bufio.ScanLines)
+	start := time.Now()
 
 	elfArray := make([]int, 0)
 	currentElfSum := 0
 
-	for fileScanner.Scan() {
-		val, err := strconv.Atoi(fileScanner.Text())
+	for _, row := range reader.ReadRows(false) {
+		val, err := strconv.Atoi(row)
 		if err != nil {
-			fmt.Println("Adding %i", currentElfSum)
 			elfArray = append(elfArray, currentElfSum)
 			currentElfSum = 0
 		}
@@ -39,4 +32,5 @@ func main() {
 	}
 
 	fmt.Println(sum)
+	fmt.Println(time.Since(start))
 }

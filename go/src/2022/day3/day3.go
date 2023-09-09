@@ -1,23 +1,15 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
+	"github.com/antonio-mikulic/advent-of-code/pkg/reader"
+	"github.com/antonio-mikulic/advent-of-code/pkg/utils"
 )
 
 func main() {
-	dat, err := os.Open("input.txt")
-	if err != nil {
-		panic(err)
-	}
-
 	var res uint16 = 0
 
-	scanner := bufio.NewScanner(dat)
-
-	for scanner.Scan() {
-		sack := scanner.Text()
+	for _, sack := range reader.ReadRows(false) {
 		middlePoint := len(sack) / 2
 		used := make(map[uint8]bool)
 
@@ -30,19 +22,11 @@ func main() {
 		for i := 0; i < len(secondHalf); i++ {
 			ch := secondHalf[i]
 			if used[ch] {
-				res += uint16(GetVal(secondHalf[i]))
+				res += uint16(utils.GetCharFromShortInt(secondHalf[i]))
 				break
 			}
 		}
 	}
 
 	fmt.Println(res)
-}
-
-func GetVal(item uint8) uint8 {
-	if item > 96 {
-		return item - 96
-	}
-
-	return item - 64 + 26
 }

@@ -3,8 +3,8 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/antonio-mikulic/advent-of-code/pkg/utils"
 	"os"
-	"strconv"
 	"strings"
 )
 
@@ -24,33 +24,16 @@ func main() {
 		secondElf := strings.Split(group[1], "-")
 
 		first := []int{
-			getIntB(firstElf[0]), getIntB(firstElf[1]),
+			utils.GetInt(firstElf[0]), utils.GetInt(firstElf[1]),
 		}
 		second := []int{
-			getIntB(secondElf[0]), getIntB(secondElf[1]),
+			utils.GetInt(secondElf[0]), utils.GetInt(secondElf[1]),
 		}
 
-		if isOverlap(first, second) {
+		if utils.IsOverlap(first, second) {
 			res += 1
 		}
 	}
 
 	fmt.Println(res)
-}
-
-func isOverlap(first []int, second []int) bool {
-	if first[0] < second[0] {
-		return first[1] >= second[0]
-	} else {
-		return second[1] >= first[0]
-	}
-}
-
-func getIntB(str string) int {
-	val, err := strconv.Atoi(str)
-	if err != nil {
-		panic(err)
-	}
-
-	return val
 }
